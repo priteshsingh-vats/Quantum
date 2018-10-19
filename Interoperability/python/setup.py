@@ -16,7 +16,7 @@ import xml.etree.ElementTree
 from distutils.cmd import Command
 from setuptools.command.build_py import build_py
 
-## CONFIGURATION #############################################################
+## CONFIGURATION ###########################################################################################################
 def pkgPlatform():
     if platform.system() == "Windows": 
         return "win10-x64"
@@ -25,16 +25,16 @@ def pkgPlatform():
     elif platform.system() == "Linux":
         return "linux-x64"
     else:
-        return "unknown"
+        return "system have a unknown configration "
 
 VERSION = os.getenv('ASSEMBLY_VERSION', '0.0.0')
 PLATFORM = os.getenv('PKG_PLATFORM', pkgPlatform())
 SRC_DIR = Path(__file__).parent.resolve()
 QSHARP_PACKAGE_ROOT = SRC_DIR / "qsharp"
 
-## NUGET DEPENDENCIES ########################################################
-# We need to copy nuget dependencies into site-packages, so we first call nuget restore
-# and then a nuget_copy
+## NUGET DEPENDENCIES ##########################################################################################
+# We need to copy nuget dependencies into site-packages, so we first call nuget restore##############################
+# and then a nuget_copy#################################################################################
 class NugetRestoreCommand(Command):
     description = 'Calls nuget restore to get the binaries from the QDK.'
     user_options = [
@@ -92,8 +92,8 @@ class CopyNugetDllsCommand(Command):
             if pkg_runtime_dir.exists():
                 lib_dlls += list(pkg_runtime_dir.glob("*.dll"))
 
-        # Copy the libraries we found adjacent to qsharp/__init__.py so that they
-        # appear as package data.
+        # Copy the libraries we found adjacent to qsharp/__init__.py so that they#########################
+        # appear as package data.#############################################
         print ("Copying DLLs into package root:")
         for lib_dll in lib_dlls:
             print("  - {}".format(lib_dll))
